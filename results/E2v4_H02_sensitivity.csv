@@ -1,0 +1,6 @@
+arm,reported_H02_claims,earliest_H02_claims,reported_H02_any_post,earliest_H02_any_post,reported_H02_kept,earliest_H02_kept,reported_H02_deleted,earliest_H02_deleted,reported_H02_date_correct_drop,earliest_H02_date_correct_drop,reported_H02_date_false_drop,earliest_H02_date_false_drop,reported_H02_date_post_kept,earliest_H02_date_post_kept
+A_strict,51,53,16,20,51,53,0,0,0,0,0,0,16,20
+A0_weak,39,39,20,20,39,39,0,0,0,0,0,0,20,20
+A0_plus_rule,39,39,20,20,19,19,20,20,20,20,0,0,0,0
+A_plus_Qwen,51,53,16,20,29,30,22,23,4,5,18,18,12,15
+A0_plus_Qwen,39,39,20,20,30,31,9,8,7,6,2,2,13,14

@@ -1,0 +1,22 @@
+# Never commit private source texts, run transcripts, or reviewer identity data
+.env
+.env.*
+*.pem
+*.key
+*.zip
+**/runs/
+**/runs_v4/
+**/original_papers/
+**/private_pdfs/
+**/*BLINDED*Claim*Review*.csv
+**/*Gold*Fact*Coverage*.csv
+__pycache__/
+*.py[cod]
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.run.xml
+*.synctex.gz

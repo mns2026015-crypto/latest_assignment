@@ -1,0 +1,2 @@
+folder,qid,protocol_version,model,seed_requested,selected_in_primary,reason
+20261117T154944549640Z_H02_r1_b5964d24,H02,E2V4_OLLAMA_NATIVE_SCHEMA_ENFORCED,atr-qwen3b,42,NO,must justify duplicate/exclusion in paper; do not silently discard

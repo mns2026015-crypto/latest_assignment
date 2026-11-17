@@ -1,0 +1,127 @@
+{
+  "protocol_name": "ATR_Lab02_ClaimTemporalFixedContext_v1",
+  "freeze_state": "LOCKED_FOR_FIRST_HELDOUT_RUN",
+  "lock_basis": "User said lets go following direct proposed annotation/scoring-rules approval request on 2026-11-13; operational choices explicitly recorded below",
+  "cutoff_utc": "2025-06-30T23:59:59Z",
+  "study": "Curated fixed-context stress test; not an end-to-end retrieval benchmark",
+  "passage_registry": "questions_contexts_SHA256.csv",
+  "question_ids": {
+    "DEV": [
+      "D01",
+      "D02"
+    ],
+    "HELD_OUT": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H09",
+      "H10",
+      "H11",
+      "H12"
+    ],
+    "EXCLUDED": [
+      "D03",
+      "H08"
+    ]
+  },
+  "context": {
+    "per_question": 8,
+    "pre_count": 4,
+    "post_count": 4,
+    "pre_gold_anchor_placements": 2,
+    "anchor_guarantee_not_performance": true,
+    "same_order_A_B": true
+  },
+  "methodology_exceptions": [
+    "Round 7 two manual passage replacements after TF-IDF selection; recorded before held-out generation",
+    "Round 8 deletion-only PDF text cleanup; original PDFs preserved",
+    "H01 post-cutoff replacement passage has weaker citation-specific relevance",
+    "D03 excluded; previous exposure to SciSage/H11-related concepts cannot be undone",
+    "Prior Round 6 proposal archive hash mismatch remains unresolved; the specific 13 current context hashes are separately locked"
+  ],
+  "model": {
+    "user_reported": "GPT-6 Thinking",
+    "interface": "ChatGPT UI; Plus subscription",
+    "exact_revision": "NOT_EXPOSED",
+    "temperature": "NOT_EXPOSED",
+    "seed": "NOT_EXPOSED",
+    "browsing": "PROHIBITED_BY_PROMPT; UI tool state must be logged if visible",
+    "memory": "Record UI state if known; fresh chats recommended"
+  },
+  "execution": {
+    "per_heldout_question_initial_A_generations": 1,
+    "per_heldout_question_initial_B_verifications": 1,
+    "fresh_chat_for_each_arm": true,
+    "exact_saved_A_reused_for_B": true,
+    "copy_all_raw_outputs_unedited": true,
+    "on_format_failure": "Preserve original; one format-only retry is permitted, recorded as deviation; if still invalid, mark case failed, not zero-score",
+    "rerun_for_quality": "PROHIBITED",
+    "run_order": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H09",
+      "H10",
+      "H11",
+      "H12"
+    ],
+    "timing": "manual UI timestamps if recorded; latency/token/API costs NA if unavailable"
+  },
+  "prompts": {
+    "baseline_A": "prompts_v1/baseline_A_template.txt",
+    "verifier_B": "prompts_v1/verifier_B_template.txt",
+    "max_A_claims": 8,
+    "A_schema": "claims:[{id,text,citations}], abstention:boolean",
+    "B_schema": "retain_claim_ids:list, decisions:map; codes KEEP,DROP_POST_CUTOFF,DROP_UNSUPPORTED,DROP_UNCERTAIN",
+    "B_guard": "exact ordered subsequence of A IDs, with no new/reworded claims and no new retrieval"
+  },
+  "scoring": {
+    "claim_support_labels": [
+      "SUPPORTED",
+      "UNSUPPORTED",
+      "UNCERTAIN"
+    ],
+    "claim_date_labels": [
+      "PRE_ONLY",
+      "POST_ONLY",
+      "MIXED",
+      "UNSUPPORTED",
+      "UNKNOWN"
+    ],
+    "separate_cited_support_from_evidence_set_support": true,
+    "primary_metric": "post-only-supported-claim count / total supported factual-claim count, calculated per arm from cited sources; pooled over 11 questions; lower better",
+    "primary_zero_denominator": "NA (never zero); also report claim totals and answer completeness",
+    "post_only_means": "Every fact-supporting cited passage is post-cutoff; claims with any sufficient pre-cutoff cited support are not POST_ONLY; unsupported/uncertain excluded and separately reported",
+    "secondary": [
+      "unsupported factual claim rate",
+      "supported claim-citation pair precision",
+      "author-approved pre-cutoff gold fact coverage",
+      "overfiltering",
+      "abstention",
+      "number of retained claims",
+      "latency/cost only if observed"
+    ],
+    "uncertainty": "Report UNCERTAIN separately; do not impute supported or unsupported",
+    "micro_primary": "Micro-pooled claims across held-out cases; show per-question rates, paired differences only where both denominators >0",
+    "zero_baseline": "If A post-only numerator is 0, do not calculate relative improvement; report absolute counts, other quality metrics, and ceiling effect",
+    "failure_analysis": "Record >=1 real verifier error or no-error case; no invented error examples",
+    "no_hypothesis_revisions_after_results": true
+  },
+  "annotation": {
+    "gold_status": "AUTHOR_APPROVED_NOT_INDEPENDENTLY_ADJUDICATED",
+    "second_annotator": "NONE_VERIFIED",
+    "atomic_claims": "Separate compound claims consistently; freeze mapping before scoring output",
+    "blind_review": "Annotate unique A claims without showing B retention decisions where practical; B inherits those labels",
+    "evidence": "citation support separately from contextual factual support; do not use postcutoff source as historical citation support"
+  },
+  "heldout_outputs": "NONE_AT_LOCK",
+  "manuscript_claim_scope": "Exploratory controlled comparison with handcrafted fixed-context passages, small n=11, manually operated ChatGPT interface; no claims about RAG retrieval improvement"
+}
